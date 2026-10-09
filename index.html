@@ -1,0 +1,92 @@
+
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Prit-AI</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0; font-family: Arial, sans-serif;
+      background: #10121b; color: white;
+      min-height: 100vh; display: flex;
+      flex-direction: column; align-items: center;
+    }
+    header { padding: 22px; font-size: 25px; font-weight: bold; }
+    header span { color: #9b87ff; }
+    main {
+      width: 92%; max-width: 650px; margin: auto;
+      padding: 20px 0;
+    }
+    h1 { font-size: 30px; }
+    .muted { color: #a9adbd; line-height: 1.6; }
+    #chat {
+      min-height: 280px; max-height: 50vh; overflow-y: auto;
+      padding: 12px 0;
+    }
+    .msg {
+      padding: 13px; border-radius: 14px;
+      margin: 10px 0; line-height: 1.6;
+      white-space: pre-wrap;
+    }
+    .user { background: #292541; margin-left: 35px; }
+    .bot { background: #1c202d; margin-right: 20px; }
+    .entry {
+      display: flex; gap: 8px; background: #202330;
+      border: 1px solid #424658; padding: 8px;
+      border-radius: 16px;
+    }
+    input {
+      flex: 1; min-width: 0; background: transparent;
+      border: 0; outline: 0; color: white; padding: 10px;
+      font-size: 16px;
+    }
+    button {
+      background: #8065f5; color: white; border: 0;
+      border-radius: 11px; padding: 12px 16px;
+      font-size: 16px; cursor: pointer;
+    }
+    footer { color: #85899b; padding: 20px; font-size: 12px; }
+  </style>
+</head>
+<body>
+  <header>✦ Prit<span>-AI</span></header>
+  <main>
+    <h1>কী জানতে চাও?</h1>
+    <p class="muted">তোমার নিজস্ব AI সহকারী। বাংলায় বা ইংরেজিতে লিখে শুরু করো!</p>
+    <div id="chat" aria-live="polite">
+      <div class="msg bot">আসসালামু আলাইকুম! 👋 আমি Prit-AI-এর ডেমো। আমাকে একটি প্রশ্ন করো!</div>
+    </div>
+    <form class="entry" id="form">
+      <input id="question" placeholder="এখানে প্রশ্ন লেখো..." autocomplete="off" required>
+      <button type="submit">➤</button>
+    </form>
+  </main>
+  <footer>Prit-AI · Your personal AI project</footer>
+  <script>
+    const form = document.getElementById('form');
+    const input = document.getElementById('question');
+    const chat = document.getElementById('chat');
+
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      const q = input.value.trim();
+      if (!q) return;
+
+      const user = document.createElement('div');
+      user.className = 'msg user';
+      user.textContent = q;
+      chat.appendChild(user);
+
+      const bot = document.createElement('div');
+      bot.className = 'msg bot';
+      bot.textContent = 'তোমার প্রশ্ন পেয়েছি! এটি এখন ডেমো সংস্করণ—বাস্তব AI-এর উত্তর পেতে পরে AI ইঞ্জিন যুক্ত করব।';
+      chat.appendChild(bot);
+
+      input.value = '';
+      chat.scrollTop = chat.scrollHeight;
+    });
+  </script>
+</body>
+</html>
